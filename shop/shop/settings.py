@@ -27,6 +27,9 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+# AUTH_USER_MODEL = 'User.user_permissions'
+AUTH_USER_MODEL = "users_management.UserManage" 
+
 
 # Application definition
 
@@ -37,8 +40,13 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    'shop',
     'mainapp',
-    'user'
+    'user',
+
+    'rest_framework',
+    'rest_auth',
 ]
 
 MIDDLEWARE = [

@@ -3,7 +3,7 @@ from django.contrib.auth import get_user_model
 # from django_content_type import contenttypes
 # Create your models here.
 
-User = get_user_model
+#User = get_user_model
 
 class Category(models.Model):
 
@@ -15,7 +15,7 @@ class Category(models.Model):
 
 
 class Product(models.Model):
-    category = models.ForeignKey(Category, verbose_name='Категория', on_delete=models.CASCADE)
+    category = models.ForeignKey('Category', verbose_name='Категория', on_delete=models.CASCADE)
     title = models.CharField(max_length=255, verbose_name='Наименование')
     slug = models.SlugField(unique=True)
     image = models.ImageField(verbose_name='Изображение')
@@ -41,7 +41,7 @@ class Cart(models.Model):
     owner = models.ForeignKey('Customer', verbose_name='Владелец', on_delete=models.CASCADE)
     products = models.ManyToManyField(CartProduct, blank = True)
     total_product = models.PositiveIntegerField(default=0)
-    final_price = models.DecimalField(ax_digits=9, decimal_places=2, verbose_name='Общая цена')
+    final_price = models.DecimalField(max_digits=9, decimal_places=2, verbose_name='Общая цена')
     
     def __str__(self):
         return str(self.id)
@@ -49,7 +49,7 @@ class Cart(models.Model):
 
 class Customer(models.Model):
 
-    user = models.ForeignKey(User, verbose_name='Пользователь', on_delete=models.CASCADE)
+    user = models.ForeignKey('User', verbose_name='Пользователь', on_delete=models.CASCADE)
     phone = models.CharField(max_length=20, verbose_name='Номер телефона')
     address = models.CharField(max_length=255, verbose_name='Адрес')
 
@@ -59,7 +59,7 @@ class Customer(models.Model):
 
 class Specification(models.Model):
 
-    content_type = models.ForeignKey(ContentType, on_delete=models.CASCADE)
+    # content_type = models.ForeignKey('', on_delete=models.CASCADE)
     object_id = models.PositiveIntegerField()
     name = models.CharField(max_length=255, verbose_name='Имя товара характеристик')
 
